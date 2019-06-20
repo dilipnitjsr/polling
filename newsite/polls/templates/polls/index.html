@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Polls</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<p>
+<a href="{% url 'polls:index' %}">Home</a>
+</p>
+<h1>Polls</h1>
+
+{% if latest_question_list %}
+    <table width="90%" class="table table-striped">
+    	<tr><td width="80%">Question</td><td>Results</td></tr>
+    {% for question in latest_question_list %}
+        <tr>
+        	<td><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></td>
+        	<td><a href="{% url 'polls:results' question.id %}"><button class="btn btn-primary">Results</button></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<p><a href='add/'><button class="btn btn-primary">Add question</button></a></p>
+
+</body>
+
+</html>

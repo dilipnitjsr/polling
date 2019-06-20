@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Add new question</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<p>
+<a href="{% url 'polls:index' %}">Home</a>
+</p>
+<h1>Add new question</h1>
+
+<form action="{% url 'polls:add' %}" method="post" class="table">
+	{% csrf_token %}
+<!--     	<label for="question_text">Question:</label> <input type="text" name="question_text" id="question_text">
+    	<h2>Choices</h2>
+    	<label for="choice1">Choice 1</label><input type="text" name="choice1" id="choice1"><br>
+    	<label for="choice1">Choice 2</label><input type="text" name="choice2" id="choice2"><br>
+    	<label for="choice1">Choice 3</label><input type="text" name="choice3" id="choice3"><br>
+    	<label for="choice1">Choice 4</label><input type="text" name="choice4" id="choice4"><br>
+    	<label for="choice1">Choice 5</label><input type="text" name="choice5" id="choice5"><br>
+		<input type="submit" value="Add"> -->
+
+	<table>
+	{{ addQuestionForm }}
+	</table>
+	<input type="submit" value="Add" class="btn btn-primary">
+</form>
+
+</body>
+
+</html>

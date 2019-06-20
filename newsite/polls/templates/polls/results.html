@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Polls</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+<p>
+<a href="{% url 'polls:index' %}">Home</a>
+</p>
+<h1>{{ question.question_text }}</h1>
+
+<p>
+<table width="50%" border="1" cellspacing="1" cellpadding="5">
+	<tr>
+		<th width="95%">Choice</th> <th>Votes</th>
+	</tr>
+{% for choice in question.choice_set.all %}
+    <tr><td>{{ choice.choice_text }}</td> <td class="vote" id="vote{{ forloop.counter }}">{{ choice.votes }}</td></tr>
+{% endfor %}
+</table>
+</p>
+
+<p>
+<a href="{% url 'polls:detail' question.id %}"><button class="btn btn-primary">Vote again?</button></a>
+</p>
+
+<script type="text/javascript">
+question_id={{ question.id }};
+ajax_url='{%url 'polls:voteapi' %}';
+setInterval(function() {
+	$.ajax({
+		url: ajax_url,
+		data: { 'question_id':question_id },
+		dataType: 'json',
+		success: function(data) {
+			//alert(data);
+			var voteCells=($('.vote'));
+			for(var i=0;i<voteCells.length;i++) {
+				voteCells[i].innerHTML=data.choices[i].votes;
+			}
+		}
+	});
+},2000);
+
+</script>
+
+</body>
+
+</html>
