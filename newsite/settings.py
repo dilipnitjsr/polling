@@ -80,13 +80,14 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
+    
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djappdb',
-        'USER': 'testuser',
-        'PASSWORD': 'testpassword',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1ap6nr1l06io2',
+        'USER': 'foqwzitkqsezgv',
+        'PASSWORD': 'aecdbe783e8f2a4d32fbc24636b036a629d9b9ec00a1ae4593035b32beb0179c',
+        'HOST': 'ec2-54-235-86-101.compute-1.amazonaws.com',
+        'PORT': '5432',
     }    
 }
 
