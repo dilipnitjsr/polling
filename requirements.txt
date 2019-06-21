@@ -4,6 +4,8 @@ django-heroku
 numpy
 pandas
 psycopg2
-SQLAlchemy==1.2.17
+SQLAlchemy==1.2.
+background_task
+
 
 
