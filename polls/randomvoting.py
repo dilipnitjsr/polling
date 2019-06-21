@@ -7,6 +7,7 @@ import time
 def testfunc():
 	while (True):
 		time.sleep(1)
+		break
 		print('background scheduler test..3')
 		for q in Question.objects.all():
 			print(q)
