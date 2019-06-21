@@ -1,5 +1,5 @@
 from django.urls import path
-from background_task import background
+#from background_task import background
 from . import views
 from  . import randomvoting
 
