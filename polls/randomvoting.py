@@ -6,7 +6,7 @@ import time
 #@background(schedule=0)
 def testfunc():
 	while (True):
-		time.sleep(2)
+		time.sleep(1)
 		print('background scheduler test..3')
 		for q in Question.objects.all():
 			print(q)
