@@ -25,7 +25,7 @@ SECRET_KEY = 'pf+a)q675gepvh-u^4wr@!4phocku65%cie)5&y+lmkt&41(t+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['testpolling.herokuapp.com']
 
 
 # Application definition
