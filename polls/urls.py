@@ -1,7 +1,7 @@
 from django.urls import path
 from background_task import background
 from . import views
-from . import randomvoting
+from  . import randomvoting
 
 app_name='polls'
 urlpatterns=[
@@ -20,4 +20,6 @@ urlpatterns=[
 ]
 
 #@background(schedule=5,)
-randomvoting.testfunc(repeat=10)
+from threading import Thread 
+x=Thread(target=randomvoting.testfunc,args='')
+x.start()
