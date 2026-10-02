@@ -1,45 +1,46 @@
-# Python: Getting Started
+# Polling
 
-A barebones Django app, which can easily be deployed to Heroku.
+A small Django polling application with question creation, voting, results, and a JSON vote-count API.
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+## Security note
 
-## Running Locally
+Historical revisions contained a Django secret key and PostgreSQL credentials in source code. Treat those historical credentials as compromised and rotate/revoke them before any production deployment.
 
-Make sure you have Python 3.7 [installed locally](http://install.python-guide.org). To push to Heroku, you'll need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), as well as [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+The current application reads deployment configuration from environment variables and defaults to SQLite for local development.
 
-```sh
-$ git clone https://github.com/heroku/python-getting-started.git
-$ cd python-getting-started
+## Local setup
 
-$ python3 -m venv getting-started
-$ pip install -r requirements.txt
-
-$ createdb python_getting_started
-
-$ python manage.py migrate
-$ python manage.py collectstatic
-
-$ heroku local
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+Required production configuration:
 
-## Deploying to Heroku
+- `DJANGO_SECRET_KEY`
+- `DJANGO_ALLOWED_HOSTS`
+- `DATABASE_URL` for PostgreSQL
+- `DJANGO_DEBUG=false`
 
-```sh
-$ heroku create
-$ git push heroku master
+## Tests
 
-$ heroku run python manage.py migrate
-$ heroku open
+```bash
+python manage.py test
 ```
-or
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+## Important behavioral fix
 
-## Documentation
+Older revisions started an infinite random-voting background thread while importing URL configuration. That code has been removed. Importing or starting the web application no longer mutates poll results.
 
-For more information about using Python on Heroku, see these Dev Center articles:
+Voting uses an atomic database increment to avoid lost updates under concurrent requests.
 
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+## API
+
+```text
+GET /polls/api/?question_id=<id>
+```
+
+returns the question text and current choice vote counts.
