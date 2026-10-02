@@ -88,7 +88,8 @@ STORAGES = {
     },
 }
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+# Preserve the legacy primary-key type from the original migrations.
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = not DEBUG
