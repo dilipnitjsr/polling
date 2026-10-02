@@ -1,4 +1,6 @@
 from django.db import migrations, models
+from django.utils import timezone
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -21,7 +23,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="question",
             name="pub_date",
-            field=models.DateTimeField(verbose_name="date published"),
+            field=models.DateTimeField(default=timezone.now, verbose_name="date published"),
+        ),
+        migrations.AlterField(
+            model_name="votedon",
+            name="choice",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="polls.choice",
+            ),
         ),
         migrations.AddConstraint(
             model_name="votedon",
